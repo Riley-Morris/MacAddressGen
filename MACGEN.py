@@ -1,22 +1,21 @@
 from getmac import get_mac_address as gma
-import os
-from docx import Document
-from docx.shared import Pt
 from tkinter import *
+import os
 
 
-username = os.getlogin()
-document = Document()
-style = document.styles['Normal']
-font = style.font
-font.name = 'Nirmala UI Semilight'
-font.size = Pt(14)
+
 macadd = gma()
-sentence = f"Hi, can you please add my device to the network? The device's MAC Address is {macadd}"
-document.add_paragraph(sentence)
-document.save(f'C:\\Users\\{username}\\Desktop\\MAC-ADDRESS.docx')
+name = os.getlogin()
+sentence = f"Hi, can you please add my device to the network?\n The device's MAC Address is {macadd}.\n Thank you"
+
 
 
 window = Tk()
-creation = Label(window,text = 'File Created on Desktop! \n Look for the word doc MAC-ADDRESS.docx').pack()
+window.geometry('600x200')
+window.option_add('*Font', '16')
+creation = Label(window,text = f"Hi {name}! Your MAC address is ready! \nCopy and paste the following into the IT request:").pack()
+f1 = Frame(window, background = 'black').pack()
+e = Text(f1, width = 300, font=('Arial 18'), highlightthickness = 4, bd = 2)
+e.insert(END, sentence)
+e.pack()
 window.mainloop()
